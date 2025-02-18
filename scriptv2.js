@@ -1,13 +1,14 @@
 function decimalToMinutes(decimal) {
     let hours = Math.floor(decimal);
-    let minutes = Math.round((decimal - hours) * 100); // Ensure correct minutes
-    return hours * 60 + minutes;
+    let minutes = Math.round((decimal - hours) * 100);
+    return (hours * 60) + minutes;
 }
 
-function minutesToDecimal(minutes) {
-    let hours = Math.floor(minutes / 60);
-    let mins = minutes % 60;
-    return parseFloat(`${hours}.${mins < 10 ? "0" : ""}${mins}`); // Ensures hh.mm format
+function minutesToDecimal(totalMinutes) {
+    let hours = Math.floor(Math.abs(totalMinutes) / 60);
+    let minutes = Math.abs(totalMinutes) % 60;
+    let result = `${totalMinutes < 0 ? '-' : ''}${hours}.${minutes < 10 ? '0' : ''}${minutes}`;
+    return parseFloat(result);
 }
 
 function subtractTimes() {
@@ -37,4 +38,4 @@ function addTimes() {
     } catch {
         document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly.";
     }
-}
+            }
