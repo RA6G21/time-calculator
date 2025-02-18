@@ -1,13 +1,13 @@
 function decimalToMinutes(decimal) {
     let hours = Math.floor(decimal);
-    let minutes = Math.round((decimal - hours) * 100);
-    return hours * 60 + minutes;
+    let minutes = Math.round((decimal - hours) * 100); // Keep as full minutes
+    return hours * 60 + minutes;  
 }
 
 function minutesToDecimal(minutes) {
     let hours = Math.floor(minutes / 60);
     let mins = minutes % 60;
-    return hours + mins / 100;
+    return parseFloat((hours + mins / 100).toFixed(2)); // Ensure precision
 }
 
 function addTimes() {
