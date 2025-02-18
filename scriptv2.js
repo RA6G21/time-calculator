@@ -42,4 +42,4 @@ function addTimes() {
     } catch {
         document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly.";
     }
-                                       }
+}
