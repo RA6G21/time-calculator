@@ -1,8 +1,14 @@
 // Convert decimal time (e.g., 2.56) to total minutes (e.g., 176)
 function decimalToMinutes(decimal) {
+    let isNegative = decimal < 0; // Track if the decimal time is negative
+    decimal = Math.abs(decimal); // Work with positive values for calculation
+
     let hours = Math.floor(decimal); // Extract the integer part (hours)
     let minutes = Math.round((decimal - hours) * 100); // Extract the decimal part (minutes)
-    return (hours * 60) + minutes; // Convert hours to minutes and add the remaining minutes
+
+    // Calculate total minutes and apply the negative sign if necessary
+    let totalMinutes = (hours * 60) + minutes;
+    return isNegative ? -totalMinutes : totalMinutes;
 }
 
 // Convert total minutes (e.g., 176) back to decimal time (e.g., 2.56)
@@ -47,4 +53,4 @@ function addTimes() {
     } catch {
         document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly."; // Handle errors
     }
-}
+                                             }
