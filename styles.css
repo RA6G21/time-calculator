@@ -10,22 +10,18 @@ html, body {
     height: 100%;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0; /* Light grey background */
-    overflow-x: hidden;
     position: relative;
 }
 
-/* Small Image in the Top-Left Corner */
-.small-image {
-    background-image: url('https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 150px; /* Image width */
-    height: 150px; /* Image height */
-    position: fixed; /* Keeps the image in the top-left corner */
+/* Image in the Top-Right Corner */
+.top-right-image {
+    width: 150px; /* Set image size */
+    height: auto;
+    position: fixed;
     top: 10px;
-    left: 10px;
+    right: 10px;
     z-index: 10;
-    border: 2px solid red; /* For debugging, remove when done */
+    border: 2px solid red; /* Debug border, remove if not needed */
 }
 
 /* Main Container Styling */
@@ -88,10 +84,9 @@ p {
         width: 90%;
         margin: 80px auto;
     }
-    .small-image {
+    .top-right-image {
         width: 100px;
-        height: 100px;
         top: 5px;
-        left: 5px;
+        right: 5px;
     }
 }
