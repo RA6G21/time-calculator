@@ -22,7 +22,7 @@ html, body {
     left: 0;
     z-index: -1;
     opacity: 1;
-    overflow: hidden;
+    object-fit: cover;
 }
 
 /* Main Container Styling */
