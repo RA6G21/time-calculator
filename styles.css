@@ -33,6 +33,7 @@ body {
     margin: 50px auto; /* Center the container vertically and horizontally */
     position: relative; /* Ensure it stays above the background */
     z-index: 1; /* Ensure it stays above the background */
+    opacity: 0.7
 }
 
 /* Headings */
