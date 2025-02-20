@@ -1,26 +1,31 @@
 /* Reset and Base Styles */
-html, body {
-    height: 100%;
+* {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
     box-sizing: border-box;
-    background-color: #f0f0f0; /* Light background for contrast */
 }
 
-/* Small Background Image in Top-Left Corner */
-.background-image {
-    background-image: url('your-image-url-here'); /* Replace with your image URL */
-    background-size: contain; /* Keep the original aspect ratio */
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light grey background */
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Small Image in the Top-Left Corner */
+.small-image {
+    background-image: url('https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png');
+    background-size: contain;
     background-repeat: no-repeat;
-    width: 150px; /* Set width of the image container */
-    height: 150px; /* Set height of the image container */
-    position: absolute;
-    top: 10px; /* Margin from the top */
-    left: 10px; /* Margin from the left */
-    z-index: 1;
-    border: 2px solid red; /* Optional: For debugging positioning */
+    width: 150px; /* Image width */
+    height: 150px; /* Image height */
+    position: fixed; /* Keeps the image in the top-left corner */
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    border: 2px solid red; /* For debugging, remove when done */
 }
 
 /* Main Container Styling */
@@ -30,9 +35,9 @@ html, body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 100px auto; /* Pushes the container below the image */
+    margin: 100px auto;
+    z-index: 1;
     position: relative;
-    z-index: 2;
 }
 
 /* Headings */
@@ -54,7 +59,6 @@ input {
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box;
 }
 
 /* Buttons */
@@ -82,9 +86,9 @@ p {
 @media (max-width: 480px) {
     .container {
         width: 90%;
-        margin: 60px auto;
+        margin: 80px auto;
     }
-    .background-image {
+    .small-image {
         width: 100px;
         height: 100px;
         top: 5px;
