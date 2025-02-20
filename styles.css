@@ -16,7 +16,7 @@ html, body {
 
 /* Background Image Styling */
 .background {
-    background-image: url(https://github.com/RA6G21/time-calculator/blob/main/aero.png);
+    background-image: url(https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png);
     background-size: cover; /* Ensures the image covers the entire screen */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -26,6 +26,7 @@ html, body {
     top: 0;
     left: 0;
     z-index: -1; /* Ensures it stays behind the content */
+    border: 2px solid red; /* Temporary border for debugging */
 }
 
 /* Main Container Styling */
@@ -42,46 +43,11 @@ html, body {
 }
 
 /* Headings */
-h1, h2 {
+h1 {
     color: #333;
 }
 
-h3 {
-    color: #555;
-    font-size: 14px;
-    margin: 5px 0;
-}
-
-/* Input Fields */
-input {
-    width: 100%; /* Full width for responsiveness */
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px; /* Larger font for better readability */
-}
-
-/* Buttons */
-button {
-    width: 100%; /* Full width for responsiveness */
-    padding: 10px;
-    border: none;
-    background-color: #f0970a;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px; /* Larger font for better readability */
-    margin: 10px 0;
-}
-
-button:hover {
-    background-color: #e08c09; /* Slightly darker on hover */
-}
-
-/* Result Paragraphs */
+/* Paragraphs */
 p {
-    font-weight: bold;
     color: #555;
-    margin: 10px 0;
 }
