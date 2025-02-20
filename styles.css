@@ -22,7 +22,7 @@ html, body {
     left: 0;
     z-index: -1;
     opacity: 1;
-    border: 2px solid red; /* Remove this after debugging */
+    overflow: hidden;
 }
 
 /* Main Container Styling */
