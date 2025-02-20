@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Image Element in the Top-Right Corner -->
-    <img src="https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png" class="top-right-image" alt="Aero Logo">
+    <!-- Small Image in the Top-Left Corner -->
+    <div class="small-image"></div>
 
     <!-- Main Content Container -->
     <div class="container">
         <h1>Aero AOC Decimal Time Calculator</h1>
 
         <h2>Add Time</h2>
-        <h3>Input format as hour.minute (no seconds)</h3>
+        <h3>Input format as h.mm</h3>
         <input type="text" id="addInput" placeholder="e.g. 1.4 + 2.35 + 0.45">
         <button onclick="addTimes()">Calculate</button>
         <p id="addResult"></p>
 
         <h2>Subtract Time</h2>
-        <h3>Input format as hour.minute (no seconds)</h3>
+        <h3>Input format as h.mm</h3>
         <input type="text" id="subInput" placeholder="e.g. 5.2 - 1.4 - 0.3">
         <button onclick="subtractTimes()">Calculate</button>
         <p id="subResult"></p>
