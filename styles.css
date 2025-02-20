@@ -15,13 +15,12 @@ html, body {
     background-image: url(https://github.com/RA6G21/time-calculator/blob/main/aero.png);
     background-size: cover;
     background-position: center;
+    opacity: 0.5;
     background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
 }
 
 /* Main Container Styling */
