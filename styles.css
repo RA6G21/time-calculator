@@ -9,7 +9,7 @@ html, body {
     overflow: hidden;
 }
 
-/* Background Image Styling */
+/* Background Image Styling 
 .background {
     background-image: url(https://github.com/RA6G21/time-calculator/blob/main/aero.png);
     background-size: cover;
@@ -22,7 +22,7 @@ html, body {
     left: 0;
     z-index: -1;
     opacity: 1;
-}
+}*/
 
 /* Main Container Styling */
 .container {
