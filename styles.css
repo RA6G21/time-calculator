@@ -21,7 +21,7 @@ html, body {
     top: 10px;
     right: 10px;
     z-index: 10;
-    border: 2px solid red; /* Debug border, remove if not needed */
+   
 }
 
 /* Main Container Styling */
