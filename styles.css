@@ -1,50 +1,44 @@
-/* Reset default margin and padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Ensure HTML and Body take full height */
+/* Reset and Base Styles */
 html, body {
     height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     text-align: center;
-    position: relative;
-    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #f0f0f0; /* Light background for contrast */
 }
 
-/* Image at the Top Right */
-.top-right-image {
-    background-image: url(https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png);
-    background-size: contain; /* Ensures the image fits within the container */
-    background-position: top right; /* Positions the image at the top right */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    width: 150px; /* Adjust the width as needed */
-    height: 150px; /* Adjust the height as needed */
-    position: absolute; /* Positions the image relative to the body */
-    top: 0;
-    right: 0;
-    z-index: 1; /* Ensures it stays above other content */
-    border: 2px solid red; /* Temporary border for debugging */
+/* Small Background Image in Top-Left Corner */
+.background-image {
+    background-image: url('your-image-url-here'); /* Replace with your image URL */
+    background-size: contain; /* Keep the original aspect ratio */
+    background-repeat: no-repeat;
+    width: 150px; /* Set width of the image container */
+    height: 150px; /* Set height of the image container */
+    position: absolute;
+    top: 10px; /* Margin from the top */
+    left: 10px; /* Margin from the left */
+    z-index: 1;
+    border: 2px solid red; /* Optional: For debugging positioning */
 }
 
 /* Main Container Styling */
 .container {
-    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    background: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    width: 90%; /* Responsive width for smaller screens */
-    margin: 20px auto; /* Centers the container */
+    margin: 100px auto; /* Pushes the container below the image */
     position: relative;
-    z-index: 2; /* Ensures it stays above the image */
+    z-index: 2;
 }
 
 /* Headings */
 h1, h2 {
     color: #333;
+    margin: 10px 0;
 }
 
 h3 {
@@ -55,34 +49,45 @@ h3 {
 
 /* Input Fields */
 input {
-    width: 100%; /* Full width for responsiveness */
-    padding: 10px;
+    width: 90%;
+    padding: 8px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px; /* Larger font for better readability */
+    box-sizing: border-box;
 }
 
 /* Buttons */
 button {
-    width: 100%; /* Full width for responsiveness */
-    padding: 10px;
+    padding: 10px 15px;
     border: none;
     background-color: #f0970a;
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px; /* Larger font for better readability */
-    margin: 10px 0;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #e08c09; /* Slightly darker on hover */
+    background-color: #e08c09;
 }
 
 /* Result Paragraphs */
 p {
     font-weight: bold;
     color: #555;
-    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        margin: 60px auto;
+    }
+    .background-image {
+        width: 100px;
+        height: 100px;
+        top: 5px;
+        left: 5px;
+    }
 }
