@@ -1,8 +1,9 @@
-/* General Body Styling */
-body {
-    font-family: Arial, sans-serif;
+/* Ensure HTML and Body take full height */
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -10,7 +11,7 @@ body {
 
 /* Background Image Styling */
 .background {
-    background-image: url(https://github.com/RA6G21/time-calculator/blob/main/aero.png);
+    background-image: url(https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,8 +20,9 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; /* Ensure it stays behind the content */
-    opacity: 1; /* Adjust opacity if needed */
+    z-index: -1;
+    opacity: 1;
+    border: 2px solid red; /* Remove this after debugging */
 }
 
 /* Main Container Styling */
@@ -30,10 +32,9 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 50px auto; /* Center the container vertically and horizontally */
-    position: relative; /* Ensure it stays above the background */
-    z-index: 1; /* Ensure it stays above the background */
-    opacity: 0.7
+    margin: 50px auto;
+    position: relative;
+    z-index: 1;
 }
 
 /* Headings */
@@ -67,7 +68,7 @@ button {
 }
 
 button:hover {
-    background-color: #e08c09; /* Slightly darker on hover */
+    background-color: #e08c09;
 }
 
 /* Result Paragraphs */
