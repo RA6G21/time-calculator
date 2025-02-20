@@ -6,14 +6,14 @@ html, body {
     font-family: Arial, sans-serif;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    
 }
 
 /* Background Image Styling */
 .background {
     background-image: url(https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png);
-    background-size: contain;
-    position: absolute;
+    background-size: cover;
+    background-position: absolute;
     top: 0;
     left: 0;
     opacity: 1;
@@ -21,6 +21,7 @@ html, body {
     width: 100%;
     height: 100vh;
     z-index: -1;
+    overflow: hidden;
 }
 
 /* Main Container Styling */
