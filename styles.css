@@ -1,39 +1,44 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Ensure HTML and Body take full height */
 html, body {
     height: 100%;
-    margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-/* Background Image Styling 
+/* Background Image Styling */
 .background {
-    background-image: url(https://github.com/RA6G21/time-calculator/blob/main/aero.png);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 20%;
-    height: 20%;
-    position: absolute;
+    background-image: url(https://raw.githubusercontent.com/RA6G21/time-calculator/main/aero.png);
+    background-size: cover; /* Ensures the image covers the entire screen */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    width: 100%;
+    height: 100%;
+    position: fixed; /* Ensures the background stays fixed while scrolling */
     top: 0;
     left: 0;
-    z-index: -1;
-    opacity: 1;
-}*/
+    z-index: -1; /* Ensures it stays behind the content */
+}
 
 /* Main Container Styling */
 .container {
-    background: white;
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 50px auto;
+    width: 90%; /* Responsive width for smaller screens */
+    margin: 20px auto; /* Centers the container */
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Ensures it stays above the background */
 }
 
 /* Headings */
@@ -49,21 +54,25 @@ h3 {
 
 /* Input Fields */
 input {
-    width: 90%;
-    padding: 8px;
+    width: 100%; /* Full width for responsiveness */
+    padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px; /* Larger font for better readability */
 }
 
 /* Buttons */
 button {
-    padding: 10px 15px;
+    width: 100%; /* Full width for responsiveness */
+    padding: 10px;
     border: none;
     background-color: #f0970a;
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 16px; /* Larger font for better readability */
+    margin: 10px 0;
 }
 
 button:hover {
@@ -74,4 +83,5 @@ button:hover {
 p {
     font-weight: bold;
     color: #555;
+    margin: 10px 0;
 }
