@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Time Calculator</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Google Analytics (GA4) - Added by you -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Analytics Tag (GA4) - REQUIRED -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYP6HDMH84"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,23 +11,23 @@
       gtag('js', new Date());
       gtag('config', 'G-RYP6HDMH84');
     </script>
+    <!-- End Google Tag -->
+    <title>Time Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Main Content Container -->
     <div class="container">
         <h1>Usman Decimal Time Calculator</h1>
 
         <h2>Add Time</h2>
         <h3>Input format as hour.minute</h3>
         <input type="text" id="addInput" placeholder="e.g. 1.4 + 2.35 + 0.45">
-        <!-- Added GA4 event tracking for the Add button -->
         <button onclick="addTimes(); gtag('event', 'calculate', { operation: 'addition' });">Calculate</button>
         <p id="addResult"></p>
 
         <h2>Subtract Time</h2>
         <h3>Input format as hour.minute</h3>
         <input type="text" id="subInput" placeholder="e.g. 5.2 - 1.4 - 0.3">
-        <!-- Added GA4 event tracking for the Subtract button -->
         <button onclick="subtractTimes(); gtag('event', 'calculate', { operation: 'subtraction' });">Calculate</button>
         <p id="subResult"></p>
     </div>
