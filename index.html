@@ -17,21 +17,26 @@
 </head>
 <body>
     <div class="container">
-        <h1>Jesutofunmi's Decimal Time Calculator</h1>
+        <h1>Aero's Decimal Time Calculator</h1>
+        
+        <div class="instructions">
+            <p><strong>How to use:</strong> Enter time values in decimal format (e.g., 1.30 means 1 hour 30 minutes). Use + for addition and - for subtraction.</p>
+            <p class="example">Example: 1.30 + 0.45 = 2.15 (2 hours 15 minutes)</p>
+        </div>
 
         <h2>Add Time</h2>
         <h3>Input format as hour.minute</h3>
         <input type="text" id="addInput" placeholder="e.g. 1.4 + 2.35 + 0.45">
         <button onclick="addTimes(); gtag('event', 'calculate', { operation: 'addition' });">Calculate</button>
-        <p id="addResult"></p>
+        <div id="addResult" class="result"></div>
 
         <h2>Subtract Time</h2>
         <h3>Input format as hour.minute</h3>
         <input type="text" id="subInput" placeholder="e.g. 5.2 - 1.4 - 0.3">
         <button onclick="subtractTimes(); gtag('event', 'calculate', { operation: 'subtraction' });">Calculate</button>
-        <p id="subResult"></p>
+        <div id="subResult" class="result"></div>
     </div>
 
-    <script src="script5.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
