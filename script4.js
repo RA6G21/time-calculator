@@ -1,56 +1,96 @@
 // Convert decimal time (e.g., 2.56) to total minutes (e.g., 176)
 function decimalToMinutes(decimal) {  
-    let isNegative = decimal < 0; // Track if the decimal time is negative  
-    decimal = Math.abs(decimal); // Work with positive values for calculation  
+    let isNegative = decimal < 0;  
+    decimal = Math.abs(decimal);  
 
-    let hours = Math.floor(decimal); // Extract the integer part (hours)  
-    let minutes = Math.round((decimal - hours) * 100); // Extract the decimal part (minutes)  
+    let hours = Math.floor(decimal);  
+    let minutes = Math.round((decimal - hours) * 100);  
 
-    // Calculate total minutes and apply the negative sign if necessary  
     let totalMinutes = (hours * 60) + minutes;  
     return isNegative ? -totalMinutes : totalMinutes;  
 }  
 
 // Convert total minutes (e.g., 176) back to HH:MM format
 function minutesToTime(totalMinutes) {  
-    let isNegative = totalMinutes < 0; // Track if the total minutes are negative  
-    totalMinutes = Math.abs(totalMinutes); // Work with positive values for calculation  
+    let isNegative = totalMinutes < 0;  
+    totalMinutes = Math.abs(totalMinutes);  
 
-    let hours = Math.floor(totalMinutes / 60); // Extract hours  
-    let minutes = totalMinutes % 60; // Extract remaining minutes  
+    let hours = Math.floor(totalMinutes / 60);  
+    let minutes = totalMinutes % 60;  
 
-    // Format the result as HH:MM with proper handling of negative values  
     let result = `${isNegative ? '-' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;  
+    return result;  
+}  
+
+// Convert total minutes to "X hours Y minutes" format
+function minutesToText(totalMinutes) {  
+    let isNegative = totalMinutes < 0;  
+    totalMinutes = Math.abs(totalMinutes);  
+
+    let hours = Math.floor(totalMinutes / 60);  
+    let minutes = totalMinutes % 60;  
+
+    let hoursText = hours === 1 ? "hour" : "hours";
+    let minutesText = minutes === 1 ? "minute" : "minutes";
+    
+    let result = `${isNegative ? '-' : ''}${hours} ${hoursText} ${minutes} ${minutesText}`;  
     return result;  
 }  
 
 // Add multiple decimal times entered by the user  
 function addTimes() {  
-    let input = document.getElementById("addInput").value; // Get user input  
-    let numbers = input.split("+").map(x => x.trim()); // Split input by "+" and remove spaces  
+    let input = document.getElementById("addInput").value;  
+    let numbers = input.split("+").map(x => x.trim());  
 
     try {  
-        let totalMinutes = numbers.reduce((sum, num) => sum + decimalToMinutes(parseFloat(num)), 0); // Add all numbers  
-        let result = minutesToTime(totalMinutes); // Convert result back to HH:MM format  
-        document.getElementById("addResult").textContent = "Total Time: " + result; // Display result  
+        let totalMinutes = numbers.reduce((sum, num) => sum + decimalToMinutes(parseFloat(num)), 0);  
+        let resultHHMM = minutesToTime(totalMinutes);  
+        let resultText = minutesToText(totalMinutes);  
+        
+        document.getElementById("addResult").innerHTML = 
+            '<div class="time-format"><span class="format-label">HH:MM format:</span> ' + resultHHMM + '</div>' +
+            '<div class="time-format"><span class="format-label">Text format:</span> ' + resultText + '</div>';  
     } catch {  
-        document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly."; // Handle errors  
+        document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly.";  
     }  
 }  
 
 // Subtract multiple decimal times entered by the user  
 function subtractTimes() {  
-    let input = document.getElementById("subInput").value; // Get user input  
-    let numbers = input.split("-").map(x => x.trim()); // Split input by "-" and remove spaces  
+    let input = document.getElementById("subInput").value;  
+    let numbers = input.split("-").map(x => x.trim());  
 
     try {  
-        let totalMinutes = decimalToMinutes(parseFloat(numbers[0])); // Convert first number to minutes  
+        let totalMinutes = decimalToMinutes(parseFloat(numbers[0]));  
         for (let i = 1; i < numbers.length; i++) {  
-            totalMinutes -= decimalToMinutes(parseFloat(numbers[i])); // Subtract each number  
+            totalMinutes -= decimalToMinutes(parseFloat(numbers[i]));  
         }  
-        let result = minutesToTime(totalMinutes); // Convert result back to HH:MM format  
-        document.getElementById("subResult").textContent = "Resulting Time: " + result; // Display result  
+        let resultHHMM = minutesToTime(totalMinutes);  
+        let resultText = minutesToText(totalMinutes);  
+        
+        document.getElementById("subResult").innerHTML = 
+            '<div class="time-format"><span class="format-label">HH:MM format:</span> ' + resultHHMM + '</div>' +
+            '<div class="time-format"><span class="format-label">Text format:</span> ' + resultText + '</div>';  
     } catch {  
-        document.getElementById("subResult").textContent = "Invalid input. Please enter decimal times correctly."; // Handle errors  
+        document.getElementById("subResult").textContent = "Invalid input. Please enter decimal times correctly.";  
     }  
-                                          }
+}
+
+// Add Enter key functionality
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("addInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            addTimes();
+            gtag('event', 'calculate', { operation: 'addition' });
+        }
+    });
+
+    document.getElementById("subInput").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            subtractTimes();
+            gtag('event', 'calculate', { operation: 'subtraction' });
+        }
+    });
+});
