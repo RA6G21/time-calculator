@@ -69,8 +69,8 @@ function subtractTimes() {
         let resultText = minutesToText(totalMinutes);  
         
         document.getElementById("subResult").innerHTML = 
-            '<div class="time-format"><span class="format-label">HH:MM format:</span> ' + resultHHMM + '</div>' +
-            '<div class="time-format"><span class="format-label">Text format:</span> ' + resultText + '</div>';  
+            '<div class="time-format"><span class="format-label"></span> ' + resultHHMM + '</div>' +
+            '<div class="time-format"><span class="format-label"></span> ' + resultText + '</div>';  
     } catch {  
         document.getElementById("subResult").textContent = "Invalid input. Please enter decimal times correctly.";  
     }  
