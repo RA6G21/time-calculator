@@ -48,8 +48,8 @@ function addTimes() {
         let resultText = minutesToText(totalMinutes);  
         
         document.getElementById("addResult").innerHTML = 
-            '<div class="time-format"><span class="format-label"></span> ' + resultHHMM + '</div>' +
-            '<div class="time-format"><span class="format-label"></span> ' + resultText + '</div>';  
+            '<div class="time-format">' + resultHHMM + '</div>' +
+            '<div class="time-format">' + resultText + '</div>';  
     } catch {  
         document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly.";  
     }  
@@ -69,8 +69,8 @@ function subtractTimes() {
         let resultText = minutesToText(totalMinutes);  
         
         document.getElementById("subResult").innerHTML = 
-            '<div class="time-format"><span class="format-label"></span> ' + resultHHMM + '</div>' +
-            '<div class="time-format"><span class="format-label"></span> ' + resultText + '</div>';  
+            '<div class="time-format">' + resultHHMM + '</div>' +
+            '<div class="time-format">' + resultText + '</div>';  
     } catch {  
         document.getElementById("subResult").textContent = "Invalid input. Please enter decimal times correctly.";  
     }  
