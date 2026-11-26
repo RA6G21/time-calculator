@@ -1,96 +1,79 @@
-// Convert decimal time (e.g., 2.56) to total minutes (e.g., 176)
-function decimalToMinutes(decimal) {  
-    let isNegative = decimal < 0;  
-    decimal = Math.abs(decimal);  
+'use strict';
 
-    let hours = Math.floor(decimal);  
-    let minutes = Math.round((decimal - hours) * 100);  
+function parseFlightTime(expression) {
+    const source = expression.trim().replace(/−/g, '-');
 
-    let totalMinutes = (hours * 60) + minutes;  
-    return isNegative ? -totalMinutes : totalMinutes;  
-}  
+    if (!source) {
+        throw new Error('Enter a flight time, such as 1.30.');
+    }
 
-// Convert total minutes (e.g., 176) back to HH:MM format
-function minutesToTime(totalMinutes) {  
-    let isNegative = totalMinutes < 0;  
-    totalMinutes = Math.abs(totalMinutes);  
+    const term = /\s*([+-]?)\s*(\d{1,9})(?:\.(\d{1,2}))?\s*/y;
+    let position = 0;
+    let totalMinutes = 0;
 
-    let hours = Math.floor(totalMinutes / 60);  
-    let minutes = totalMinutes % 60;  
+    while (position < source.length) {
+        term.lastIndex = position;
+        const match = term.exec(source);
 
-    let result = `${isNegative ? '-' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}`;  
-    return result;  
-}  
+        if (!match || (position > 0 && !match[1])) {
+            throw new Error('Enter times as H.MM, with + or - between entries.');
+        }
 
-// Convert total minutes to "X hours Y minutes" format
-function minutesToText(totalMinutes) {  
-    let isNegative = totalMinutes < 0;  
-    totalMinutes = Math.abs(totalMinutes);  
+        if (term.lastIndex < source.length && !'+-'.includes(source[term.lastIndex])) {
+            throw new Error('Check the time format. Use up to two digits after the dot.');
+        }
 
-    let hours = Math.floor(totalMinutes / 60);  
-    let minutes = totalMinutes % 60;  
+        const [, operator, hours, minuteDigits = ''] = match;
 
-    let hoursText = hours === 1 ? "hour" : "hours";
-    let minutesText = minutes === 1 ? "minute" : "minutes";
-    
-    let result = `${isNegative ? '-' : ''}${hours} ${hoursText} ${minutes} ${minutesText}`;  
-    return result;  
-}  
+        // Preserve Aero shorthand: 1.3 means 1 hour 30 minutes.
+        const minutes = Number(minuteDigits.padEnd(2, '0'));
 
-// Add multiple decimal times entered by the user  
-function addTimes() {  
-    let input = document.getElementById("addInput").value;  
-    let numbers = input.split("+").map(x => x.trim());  
+        if (minutes > 59) {
+            throw new Error(`“${hours}.${minuteDigits}” has ${minutes} minutes. Use 00–59.`);
+        }
 
-    try {  
-        let totalMinutes = numbers.reduce((sum, num) => sum + decimalToMinutes(parseFloat(num)), 0);  
-        let resultHHMM = minutesToTime(totalMinutes);  
-        let resultText = minutesToText(totalMinutes);  
-        
-        document.getElementById("addResult").innerHTML = 
-            '<div class="time-format">' + resultHHMM + '</div>' +
-            '<div class="time-format">' + resultText + '</div>';  
-    } catch {  
-        document.getElementById("addResult").textContent = "Invalid input. Please enter decimal times correctly.";  
-    }  
-}  
+        const duration = Number(hours) * 60 + minutes;
+        totalMinutes += operator === '-' ? -duration : duration;
+        position = term.lastIndex;
+    }
 
-// Subtract multiple decimal times entered by the user  
-function subtractTimes() {  
-    let input = document.getElementById("subInput").value;  
-    let numbers = input.split("-").map(x => x.trim());  
-
-    try {  
-        let totalMinutes = decimalToMinutes(parseFloat(numbers[0]));  
-        for (let i = 1; i < numbers.length; i++) {  
-            totalMinutes -= decimalToMinutes(parseFloat(numbers[i]));  
-        }  
-        let resultHHMM = minutesToTime(totalMinutes);  
-        let resultText = minutesToText(totalMinutes);  
-        
-        document.getElementById("subResult").innerHTML = 
-            '<div class="time-format">' + resultHHMM + '</div>' +
-            '<div class="time-format">' + resultText + '</div>';  
-    } catch {  
-        document.getElementById("subResult").textContent = "Invalid input. Please enter decimal times correctly.";  
-    }  
+    return totalMinutes;
 }
 
-// Add Enter key functionality
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById("addInput").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            addTimes();
-            gtag('event', 'calculate', { operation: 'addition' });
-        }
-    });
+function showFlightTime(inputId, resultId) {
+    const input = document.getElementById(inputId);
+    const result = document.getElementById(resultId);
 
-    document.getElementById("subInput").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
-            subtractTimes();
-            gtag('event', 'calculate', { operation: 'subtraction' });
-        }
-    });
-});
+    let total;
+
+    try {
+        total = parseFlightTime(input.value);
+    } catch (error) {
+        result.textContent = error.message;
+        return;
+    }
+
+    const absoluteTotal = Math.abs(total);
+    const hours = Math.floor(absoluteTotal / 60);
+    const minutes = absoluteTotal % 60;
+    const sign = total < 0 ? '-' : '';
+
+    const timeLine = document.createElement('p');
+    timeLine.textContent = `${sign}${hours}:${String(minutes).padStart(2, '0')}`;
+
+    const description = document.createElement('p');
+    const hourLabel = hours === 1 ? 'hour' : 'hours';
+    const minuteLabel = minutes === 1 ? 'minute' : 'minutes';
+    const prefix = total < 0 ? 'Minus ' : '';
+    description.textContent = `${prefix}${hours} ${hourLabel} ${minutes} ${minuteLabel}`;
+
+    result.replaceChildren(timeLine, description);
+}
+
+function addTimes() {
+    showFlightTime('addInput', 'addResult');
+}
+
+function subtractTimes() {
+    showFlightTime('subInput', 'subResult');
+}
