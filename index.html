@@ -3,39 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Analytics Tag (GA4) - REQUIRED -->
+    <title>Aero Decimal Time Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYP6HDMH84"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RYP6HDMH84');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            window.dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-RYP6HDMH84');
     </script>
-    <!-- End Google Tag -->
-    <title>Time Calculator</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <header class="site-header">
+        <img class="top-right-image" src="aero.png" alt="Aero">
+    </header>
+
+    <main class="container">
         <h1>Aero Decimal Time Calculator</h1>
-        
+
         <div class="instructions">
-            <p><strong>How to use:</strong> Enter time values in decimal format (e.g., 1.30 means 1 hour 30 minutes). Use + for addition and - for subtraction.</p>
-            <p class="example">Example: 1.30 + 0.45 = 2.15 (2 hours 15 minutes)</p>
+            <p>Enter times as hours and minutes separated by a dot. Use <strong>+</strong> to add and <strong>−</strong> to subtract.</p>
+            <p class="example">1.30 + 0.45 = 2.15 (2 hours 15 minutes)</p>
         </div>
 
-        <h2>Add Time</h2>
-        <h3>Input format as hour.minute</h3>
-        <input type="text" id="addInput" placeholder="e.g. 1.4 + 2.35 + 0.45">
-        <button onclick="addTimes(); gtag('event', 'calculate', { operation: 'addition' });">Calculate</button>
-        <div id="addResult" class="result"></div>
+        <section class="operation" aria-labelledby="addHeading">
+            <h2 id="addHeading">Add Time</h2>
+            <label for="addInput">Enter times in hour.minute format</label>
+            <input type="text" id="addInput" placeholder="e.g. 1.30 + 2.35 + 0.45">
+            <button type="button" onclick="addTimes(); gtag('event', 'calculate', { operation: 'addition' });">
+                Calculate
+            </button>
+            <div id="addResult" class="result" aria-live="polite"></div>
+        </section>
 
-        <h2>Subtract Time</h2>
-        <h3>Input format as hour.minute</h3>
-        <input type="text" id="subInput" placeholder="e.g. 5.2 - 1.4 - 0.3">
-        <button onclick="subtractTimes(); gtag('event', 'calculate', { operation: 'subtraction' });">Calculate</button>
-        <div id="subResult" class="result"></div>
-    </div>
+        <section class="operation" aria-labelledby="subHeading">
+            <h2 id="subHeading">Subtract Time</h2>
+            <label for="subInput">Enter times in hour.minute format</label>
+            <input type="text" id="subInput" placeholder="e.g. 5.20 - 1.40 - 0.30">
+            <button type="button" onclick="subtractTimes(); gtag('event', 'calculate', { operation: 'subtraction' });">
+                Calculate
+            </button>
+            <div id="subResult" class="result" aria-live="polite"></div>
+        </section>
+    </main>
 
     <script src="script4.js"></script>
 </body>
