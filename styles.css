@@ -1,92 +1,128 @@
-/* Reset and Base Styles */
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-html, body {
-    width: 100%;
-    height: 100%;
+body {
+    margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light grey background */
-    position: relative;
-}
-
-/* Image in the Top-Right Corner */
-.top-right-image {
-    width: 150px; /* Set image size */
-    height: auto;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-   
-}
-
-/* Main Container Styling */
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 100px auto;
-    z-index: 1;
-    position: relative;
-}
-
-/* Headings */
-h1, h2 {
     color: #333;
-    margin: 10px 0;
+    background-color: #f0f0f0;
 }
 
-h3 {
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    background-color: #f0f0f0;
+}
+
+.top-right-image {
+    display: block;
+    width: clamp(100px, 22vw, 150px);
+    height: auto;
+    object-fit: contain;
+}
+
+.container {
+    width: calc(100% - 32px);
+    max-width: 440px;
+    margin: 16px auto 40px;
+    padding: 24px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0 0 16px;
+    font-size: clamp(1.5rem, 5vw, 1.875rem);
+    line-height: 1.2;
+}
+
+.instructions {
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #fff4df;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.instructions p {
+    margin: 0;
+}
+
+.instructions .example {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.operation {
+    margin-top: 24px;
+}
+
+.operation h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
     color: #555;
-    font-size: 14px;
-    margin: 5px 0;
+    font-size: 0.875rem;
 }
 
-/* Input Fields */
 input {
-    width: 90%;
-    padding: 8px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #aaa;
     border-radius: 5px;
+    font: inherit;
 }
 
-/* Buttons */
 button {
-    padding: 10px 15px;
-    border: none;
-    background-color: #f0970a;
-    color: white;
-    cursor: pointer;
+    padding: 10px 16px;
+    border: 0;
     border-radius: 5px;
-    transition: background-color 0.3s;
+    background-color: #f0970a;
+    color: #222;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 button:hover {
     background-color: #e08c09;
 }
 
-/* Result Paragraphs */
-p {
-    font-weight: bold;
-    color: #555;
+input:focus-visible,
+button:focus-visible {
+    outline: 2px solid #8a4b00;
+    outline-offset: 2px;
 }
 
-/* Responsive Design */
+.result {
+    color: #333;
+    font-weight: bold;
+    overflow-wrap: anywhere;
+}
+
+.result:not(:empty) {
+    margin-top: 10px;
+}
+
+.result p {
+    margin: 0;
+}
+
 @media (max-width: 480px) {
     .container {
-        width: 90%;
-        margin: 80px auto;
-    }
-    .top-right-image {
-        width: 100px;
-        top: 5px;
-        right: 5px;
+        padding: 18px;
     }
 }
