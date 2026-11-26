@@ -3,107 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aero Flight Time Calculator</title>
+    <title>Aero Decimal Time Calculator</title>
     <link rel="stylesheet" href="styles.css">
 
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RYP6HDMH84"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            window.dataLayer.push(arguments);
-        }
+        function gtag() { window.dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-RYP6HDMH84');
     </script>
-
-    <script src="script4.js" defer></script>
 </head>
 <body>
-    <div class="page">
-        <header class="site-header">
-            <h1>Aero Flight Time Calculator</h1>
-            <img class="aero-logo" src="aero.png" alt="Aero">
-        </header>
+    <header class="site-header">
+        <img class="top-right-image" src="aero.png" alt="Aero">
+    </header>
 
-        <main>
-            <div class="workspace">
-                <section class="card" aria-label="Flight time entry">
-                    <div class="button-row modes" role="group" aria-label="Calculator mode">
-                        <button type="button" id="add" aria-pressed="true">Add time</button>
-                        <button type="button" id="subtract" aria-pressed="false">Subtract time</button>
-                    </div>
+    <main class="container">
+        <h1>Aero Decimal Time Calculator</h1>
 
-                    <form id="calculator" novalidate>
-                        <label for="expression">Flight time expression</label>
-                        <p class="hint" id="format-hint">
-                            Enter hours and minutes. <strong>1.30</strong> or
-                            <strong>1.3</strong> means 1 hour 30 minutes.
-                            You can use + and − in the same expression.
-                        </p>
-                        <input
-                            id="expression"
-                            type="text"
-                            placeholder="e.g. 1.3 + 2.4"
-                            maxlength="500"
-                            autocomplete="off"
-                            spellcheck="false"
-                            aria-describedby="format-hint input-error"
-                        >
-                        <p id="input-error" class="error" aria-live="polite" hidden></p>
+        <p class="instructions">
+            Enter hours and minutes separated by a dot.
+            <strong>1.30</strong> or <strong>1.3</strong> means 1 hour 30 minutes.
+        </p>
 
-                        <div class="button-row">
-                            <button class="primary" type="submit">Calculate</button>
-                            <button type="button" id="example">Try example</button>
-                            <button type="button" id="clear">Clear</button>
-                        </div>
-                    </form>
-                </section>
-
-                <section class="card" aria-labelledby="result-heading">
-                    <h2 id="result-heading">Result</h2>
-
-                    <div class="result-panel" aria-live="polite">
-                        <p class="result-number" id="total" hidden></p>
-                        <p id="result-message">Enter flight times to calculate a total.</p>
-                    </div>
-
-                    <div class="copy-controls">
-                        <label for="excel-format">Excel format</label>
-                        <select id="excel-format">
-                            <option value="minutes">Total minutes</option>
-                            <option value="decimal">Decimal hours (4 decimal places)</option>
-                            <option value="duration">Hours and minutes (H:MM)</option>
-                            <option value="dot">Hours and minutes (H.MM)</option>
-                        </select>
-                        <p class="hint" id="copy-preview">Choose the format your worksheet uses.</p>
-                        <button id="copy" type="button" disabled>Copy for Excel</button>
-                        <p class="hint" id="copy-status" role="status"></p>
-                        <input id="manual-copy" aria-label="Value to copy for Excel" readonly hidden>
-                    </div>
-
-                    <div class="table-wrap" id="breakdown" tabindex="0"
-                         role="region" aria-label="Calculation breakdown" hidden>
-                        <table>
-                            <caption>Calculation breakdown</caption>
-                            <thead>
-                                <tr>
-                                    <th scope="col">Entry</th>
-                                    <th scope="col">Read as</th>
-                                    <th scope="col">Running total</th>
-                                </tr>
-                            </thead>
-                            <tbody id="steps"></tbody>
-                        </table>
-                    </div>
-                </section>
+        <section class="operation" aria-labelledby="addHeading">
+            <h2 id="addHeading">Add Time</h2>
+            <form id="addForm">
+                <label for="addInput">Times to add</label>
+                <input id="addInput" type="text" placeholder="e.g. 1.30 + 2.40"
+                       autocomplete="off" required>
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="addResult" class="result" aria-live="polite"></div>
+            <div id="addCopyControls" class="copy-controls" hidden>
+                <button id="addCopy" class="copy-button" type="button">Copy for Excel</button>
+                <p id="addCopyStatus" class="copy-status" role="status"></p>
+                <input id="addManualCopy" aria-label="Result to copy" readonly hidden>
             </div>
+        </section>
 
-            <section class="card history" id="history" aria-labelledby="history-heading" hidden>
-                <h2 id="history-heading">Recent calculations</h2>
-                <ul id="recent"></ul>
-            </section>
-        </main>
-    </div>
+        <section class="operation" aria-labelledby="subHeading">
+            <h2 id="subHeading">Subtract Time</h2>
+            <form id="subForm">
+                <label for="subInput">Times to subtract</label>
+                <input id="subInput" type="text" placeholder="e.g. 5.20 - 1.40 - 0.30"
+                       autocomplete="off" required>
+                <button type="submit">Calculate</button>
+            </form>
+            <div id="subResult" class="result" aria-live="polite"></div>
+            <div id="subCopyControls" class="copy-controls" hidden>
+                <button id="subCopy" class="copy-button" type="button">Copy for Excel</button>
+                <p id="subCopyStatus" class="copy-status" role="status"></p>
+                <input id="subManualCopy" aria-label="Result to copy" readonly hidden>
+            </div>
+        </section>
+    </main>
+
+    <script src="script4.js"></script>
+    <script>
+        function connectCalculator(prefix, calculate, operation) {
+            const form = document.getElementById(prefix + 'Form');
+            const input = document.getElementById(prefix + 'Input');
+            const result = document.getElementById(prefix + 'Result');
+            const controls = document.getElementById(prefix + 'CopyControls');
+            const copyButton = document.getElementById(prefix + 'Copy');
+            const status = document.getElementById(prefix + 'CopyStatus');
+            const manualCopy = document.getElementById(prefix + 'ManualCopy');
+            let value = '';
+            let revision = 0;
+
+            function clearResult() {
+                revision++;
+                value = '';
+                result.textContent = '';
+                status.textContent = '';
+                manualCopy.value = '';
+                manualCopy.hidden = true;
+                controls.hidden = true;
+            }
+
+            input.addEventListener('input', clearResult);
+
+            form.addEventListener('submit', event => {
+                event.preventDefault();
+                clearResult();
+                calculate();
+
+                // The original calculator displays H:MM first.
+                const match = result.textContent.trim().match(/^[-−]?\d+:[0-5]\d/);
+                if (match) {
+                    value = match[0].replace('−', '-');
+                    copyButton.textContent = 'Copy for Excel (' + value + ')';
+                    controls.hidden = false;
+                }
+
+                gtag('event', 'calculate', { operation });
+            });
+
+            copyButton.addEventListener('click', async () => {
+                if (!value) return;
+
+                const copiedValue = value;
+                const copyRevision = revision;
+
+                try {
+                    await navigator.clipboard.writeText(copiedValue);
+                    if (copyRevision !== revision) return;
+                    manualCopy.hidden = true;
+                    status.textContent = 'Copied ' + copiedValue + '.';
+                } catch {
+                    if (copyRevision !== revision) return;
+                    manualCopy.value = copiedValue;
+                    manualCopy.hidden = false;
+                    manualCopy.focus();
+                    manualCopy.select();
+                    status.textContent = 'Press Ctrl+C or Cmd+C to copy.';
+                }
+            });
+        }
+
+        connectCalculator('add', addTimes, 'addition');
+        connectCalculator('sub', subtractTimes, 'subtraction');
+    </script>
 </body>
 </html>
